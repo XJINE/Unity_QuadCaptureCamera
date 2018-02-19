@@ -9,7 +9,7 @@ public class QuadCaptureCamera : MonoBehaviour
 
     #region Field
 
-    protected Camera quadCaptureCamera;
+    protected new Camera camera;
 
     public GameObject quad;
 
@@ -21,7 +21,7 @@ public class QuadCaptureCamera : MonoBehaviour
 
     protected void Awake()
     {
-        this.quadCaptureCamera = base.GetComponent<Camera>();
+        this.camera = base.GetComponent<Camera>();
         InitializeSettings(this.quad.transform.localScale);
     }
 
@@ -34,17 +34,25 @@ public class QuadCaptureCamera : MonoBehaviour
             InitializeSettings(quadScale);
         }
 
-        this.quadCaptureCamera.cullingMask = 1 << this.quad.layer;
+        this.camera.cullingMask = 1 << this.quad.layer;
     }
 
     protected virtual void InitializeSettings(Vector3 quadScale)
     {
         this.previousQuadScale = quadScale;
 
-        this.quadCaptureCamera.orthographic = true;
-        this.quadCaptureCamera.rect = new Rect(0, 0, quadScale.x, quadScale.y);
-        this.quadCaptureCamera.orthographicSize = this.quadCaptureCamera.rect.height / 2;
-        this.quadCaptureCamera.aspect = quadScale.x / quadScale.y;
+        this.camera.orthographic = true;
+        this.camera.rect = new Rect(0, 0, quadScale.x, quadScale.y);
+        this.camera.orthographicSize = this.camera.rect.height / 2;
+        this.camera.aspect = quadScale.x / quadScale.y;
+
+        // WARNING:
+        // Need to do following setup. If not, output image are not show in fullscreen. 
+
+        if (this.camera.rect.width < 1 || this.camera.rect.height < 1)
+        {
+            this.camera.rect = new Rect(this.camera.rect.x, this.camera.rect.y, 1, 1);
+        }
     }
 
     #endregion Method
