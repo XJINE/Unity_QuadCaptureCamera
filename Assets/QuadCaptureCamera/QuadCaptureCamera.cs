@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
+[ExecuteInEditMode]
 public class QuadCaptureCamera : MonoBehaviour
 {
     // NOTE:
@@ -27,6 +28,11 @@ public class QuadCaptureCamera : MonoBehaviour
 
     protected void Update()
     {
+        if (this.quad == null) 
+        {
+            return;
+        }
+
         Vector3 quadScale = this.quad.transform.localScale;
 
         if (this.previousQuadScale != quadScale)
