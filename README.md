@@ -1,6 +1,6 @@
 # Unity_QuadCaptureCamera
 
-![](https://github.com/XJINE/Unity_QuadCaptureCamera/blob/master/screenshot.jpg)
+<img src="https://github.com/XJINE/Unity_QuadCaptureCamera/blob/master/screenshot.jpg" width="100%" height="auto" />
 
 Set orthographic camera viewport rect to capture whole a quad.
 
