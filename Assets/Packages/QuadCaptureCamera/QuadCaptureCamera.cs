@@ -40,7 +40,10 @@ public class QuadCaptureCamera : MonoBehaviour
             InitializeSettings(quadScale);
         }
 
-        this.camera.cullingMask = 1 << this.quad.layer;
+        // NOTE:
+        // Culling mask setting like following code is not good.
+        // This class should be used in many case.
+        // this.camera.cullingMask = 1 << this.quad.layer;
     }
 
     protected virtual void InitializeSettings(Vector3 quadScale)
